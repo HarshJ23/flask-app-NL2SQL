@@ -23,6 +23,9 @@ COPY requirements.txt /app/
 RUN pip install --upgrade pip
 RUN pip install -r requirements.txt
 
+# Install flask-cors
+RUN pip install flask-cors
+
 # Copy the rest of the application code into the container
 COPY . /app/
 

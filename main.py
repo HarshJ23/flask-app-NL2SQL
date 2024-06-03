@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 from langchain_community.utilities.sql_database import SQLDatabase
 from sqlalchemy import create_engine
 from langchain_community.agent_toolkits import create_sql_agent
@@ -10,6 +11,7 @@ import os
 load_dotenv()
 
 app = Flask(__name__)
+CORS(app)
 
 # Database connection setup
 connectionString = os.getenv("DATABASE_URL")
@@ -34,5 +36,7 @@ def execute_query():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+# if __name__ == '__main__':
+#     app.run(debug=True)
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=8080)
